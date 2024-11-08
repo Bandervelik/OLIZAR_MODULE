@@ -1,24 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import Page1 from './components/Page1';
+import Page2 from './components/Page2';
 
 function App() {
+  const name = "Михайло ОЛІЗАР";
+  const city = "м. Василівка Запорізька обл.";
+  const hobby = "Займаюся авто-електрикою";
+  const group = "ІСТ";
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div>
+        <Header name={name} city={city} hobby={hobby} />
+
+        <nav style={{ textAlign: 'center', margin: '10px' }}>
+          <Link to="/page1" style={{ marginRight: '10px' }}>Сторінка 1</Link>
+          <Link to="/page2">Сторінка 2</Link>
+        </nav>
+
+        <Routes>
+          <Route path="/page1" element={<Page1 city={city} />} />
+          <Route path="/page2" element={<Page2 hobby={hobby} />} />
+        </Routes>
+
+        <Footer group={group} />
+      </div>
+    </Router>
   );
 }
 
